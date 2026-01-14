@@ -34,11 +34,11 @@
 1. Run The `TempCleaner.bat`.
 
 2. Choose from the menu:
-   Quick Cleanup           (fast one-click cleaning)
-   Auto Disk Cleanup       (silent Windows Disk Cleanup – requires one-time setup)
-   Setup Instructions      (how to configure option 2)
-   About Developer
-   Exit
+   -Quick Cleanup           (fast one-click cleaning)
+   -Auto Disk Cleanup       (silent Windows Disk Cleanup – requires one-time setup)
+   -Setup Instructions      (how to configure option 2)
+   -About Developer
+   -Exit
 
 3. Then Select "Setup Instructions"
    and setup Auto Disk Cleanup as per the guide
