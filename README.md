@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)  
 ![Version](https://img.shields.io/badge/version-1.2.0-orange)  
 
-**Temp-Cleaner** is a lightweight, open-source Windows batch script that helps free up disk space and improve performance by removing temporary files, caches, DNS cache, Windows Update leftovers, and and integrated Disk Cleanup automation.
+**Temp-Cleaner** is a lightweight, open-source Windows batch script that helps free up disk space and improve performance by removing temporary files, caches, DNS cache, Windows Update leftovers, and integrated Disk Cleanup automation.
 
 ---
 
@@ -46,9 +46,10 @@
 ---
 
 ## When to Use
-- Best used monthly, before/after large Windows updates, or when disk space is low
-- Option 2 (Auto Disk Cleanup) gives the biggest space savings when configured to clean old Windows Update files, Recycle Bin, thumbnails, etc.
-- At the end of the day.
+- Monthly maintenance
+- Before or after large Windows updates
+- When free disk space on C: is getting low
+- Whenever the system feels sluggish
 
 ---
 
