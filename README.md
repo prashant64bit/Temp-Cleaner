@@ -2,56 +2,55 @@
 
 ![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)  
 ![License](https://img.shields.io/badge/license-MIT-green)  
-![Version](https://img.shields.io/badge/version-1.1.0-orange)  
+![Version](https://img.shields.io/badge/version-1.2.0-orange)  
 
-**Temp-Cleaner** is a lightweight and open-source Windows cleaner script that helps you free up disk space, junks and improve performance by removing unnecessary files and caches.  
-
----
-
-## ✨ Features  
-
-- Cleans temporary folders:  
-  - `%TEMP%`  
-  - `%LocalAppData%\Temp`  
-  - `C:\Windows\Temp`  
-- Flushes **DNS cache**  
-- Clears **Microsoft Edge** & **Google Chrome** caches  
-- Removes **Windows Update** cache  
-- Runs **background system maintenance tasks** (`ProcessIdleTasks`)  
-- Available as both `.bat` (open-source) and `.exe` (compiled, runs as admin by default)  
+**Temp-Cleaner** is a lightweight, open-source Windows batch script that helps free up disk space and improve performance by removing temporary files, caches, DNS cache, Windows Update leftovers, and and integrated Disk Cleanup automation.
 
 ---
 
-## 📥 Installation  
+## Features  
 
-1. Download the latest release from the [Releases page](https://github.com/ShortageOfName/Temp-Cleaner/releases).  
-2. Choose either:  
-   - `TempCleaner.bat` → Open-source batch script (right-click → Run as Administrator).  
-   - `TempCleaner.exe` → Precompiled executable (auto-runs as Administrator).  
-
----
-
-## 🚀 Usage  
-
-- Double-click `TempCleaner.exe` (recommended), or  
-- Right-click `TempCleaner.bat` → **Run as Administrator**  
-
----
-
-## 📌 Notes  
-
-- This tool is **safe to use** - it only clears temporary/cache files and Windows Update leftovers.  
-- No system-critical files are deleted.  
-- Best used before/after installing updates or when system feels slow.  
+- **Quick Cleanup mode** :
+  - Clears temporary folders:
+    - `%TEMP%`
+    - `%LocalAppData%\Temp`
+    - `C:\Windows\Temp`
+  - Flushes **DNS cache**
+  - Clears **Microsoft Edge** & **Google Chrome** browser caches (Cache + Code Cache)
+  - Removes **Windows Update** download & datastore cache
+  - Runs Windows background idle maintenance tasks (`ProcessIdleTasks`)
+- **Auto Disk Cleanup mode** — runs Windows built-in Disk Cleanup silently with your pre-configured preset
+- Automatic **admin rights request** (elevates itself if not run as administrator)
+- Clean, colorful menu interface
+- Setup instructions included for Disk Cleanup preset
+- Only targets temporary & cache data (no system-critical files are touched)
 
 ---
 
-## 📜 License  
+## Usage  
 
-This project is licensed under the [MIT License](LICENSE).  
+**Recommended way:**
+
+1. Run The `TempCleaner.bat`.
+
+2. Choose from the menu:
+   Quick Cleanup           (fast one-click cleaning)
+   Auto Disk Cleanup       (silent Windows Disk Cleanup – requires one-time setup)
+   Setup Instructions      (how to configure option 2)
+   About Developer
+   Exit
+
+3. Then Select "Setup Instructions"
+   and setup Auto Disk Cleanup as per the guide
 
 ---
 
-## 📊 Changelog  
+## When to Use
+- Best used monthly, before/after large Windows updates, or when disk space is low
+- Option 2 (Auto Disk Cleanup) gives the biggest space savings when configured to clean old Windows Update files, Recycle Bin, thumbnails, etc.
+- At the end of the day.
 
-See [CHANGELOG](https://github.com/ShortageOfName/Temp-Cleaner/releases) for details on each release.  
+---
+
+## LICENSE
+This project is licensed under the [MIT License](LICENSE).
