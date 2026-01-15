@@ -1,5 +1,5 @@
 @echo off
-title Cleaner - Prashant
+title Cleaner - Prashant v1.3.0
 color 0A
 
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -16,7 +16,7 @@ if '%errorlevel%' NEQ '0' (
 cls
 echo.
 echo  =======================================
-echo          TempCleaner - v1.2.0
+echo       TempCleaner - v1.3.0
 echo  =======================================
 echo.
 echo  1 - Quick Cleanup
@@ -31,7 +31,7 @@ if /i "%sel%"=="1" goto quick
 if /i "%sel%"=="2" goto disk
 if /i "%sel%"=="3" goto instructions
 if /i "%sel%"=="4" goto info
-if /i "%sel%"=="99" exit
+if /i "%sel%"=="99" goto end
 goto menu
 
 :quick
@@ -40,51 +40,72 @@ echo.
 echo  Quick Cleanup running...
 echo.
 
-echo [1/7] %TEMP%
-del /q /f /s "%TEMP%\*.*" 2>nul
-rd /s /q "%TEMP%" 2>nul
-md "%TEMP%" 2>nul
+echo [1/9] User TEMP folders
+del /q /f /s /a "%TEMP%\*.*" 2>nul
+del /q /f /s /a "%localappdata%\Temp\*.*" 2>nul
+echo Cleared.
+echo.
 
-echo [2/7] Local Temp
-del /q /f /s "%localappdata%\Temp\*.*" 2>nul
-rd /s /q "%localappdata%\Temp" 2>nul
-md "%localappdata%\Temp" 2>nul
+echo [2/9] Windows Temp
+del /q /f /s /a "C:\Windows\Temp\*.*" 2>nul
+echo Cleared.
+echo.
 
-echo [3/7] Windows Temp
-del /q /f /s "C:\Windows\Temp\*.*" 2>nul
-rd /s /q "C:\Windows\Temp" 2>nul
-md "C:\Windows\Temp" 2>nul
-
-echo [4/7] DNS flush
+echo [3/9] DNS flush
 ipconfig /flushdns >nul 2>&1
+echo Cleared.
+echo.
 
-echo [5/7] Browser caches
+echo [4/9] Browser caches
 rd /s /q "%localappdata%\Microsoft\Edge\User Data\Default\Cache"         2>nul
 rd /s /q "%localappdata%\Microsoft\Edge\User Data\Default\Code Cache"    2>nul
 rd /s /q "%localappdata%\Google\Chrome\User Data\Default\Cache"          2>nul
 rd /s /q "%localappdata%\Google\Chrome\User Data\Default\Code Cache"     2>nul
+echo Cleared.
+echo.
 
-echo [6/7] Update cache
-del /q /f /s "C:\Windows\SoftwareDistribution\Download\*.*"  2>nul
-del /q /f /s "C:\Windows\SoftwareDistribution\DataStore\*.*" 2>nul
+echo [5/9] Windows Update cache
+net stop wuauserv   >nul 2>&1
+net stop bits       >nul 2>&1
+del /q /f /s /a "C:\Windows\SoftwareDistribution\Download\*.*"  2>nul
+net start wuauserv  >nul 2>&1
+net start bits      >nul 2>&1
+echo Cleared.
+echo.
 
-echo [7/7] Idle tasks
+echo [6/9] Prefetch
+del /q /f /s /a "C:\Windows\Prefetch\*.*" 2>nul
+echo Cleared.
+echo.
+
+echo [7/9] Thumbnail cache
+del /q /f /s /a "%localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db" 2>nul
+echo Cleared.
+echo.
+echo [8/9] Recycle Bin
+powershell -command "Clear-RecycleBin -Force -ErrorAction SilentlyContinue" >nul 2>&1
+echo Cleared.
+echo.
+
+echo [9/9] Idle tasks
 start "" rundll32.exe advapi32.dll,ProcessIdleTasks >nul 2>&1
-
+echo Processed.
 echo.
 echo  Quick done.
+echo.
 pause
 goto menu
+
 
 :disk
 cls
 echo.
 echo  Auto Disk Cleanup running...
-echo  (silent mode - your preset)
 echo.
 cleanmgr /sagerun:50
 echo.
-echo  Finished - check free space on C:.
+echo  Finished.
+echo.
 pause
 goto menu
 
@@ -97,20 +118,20 @@ echo  =======================================
 echo.
 echo  Do this ONE TIME so option 2 works silently:
 echo.
-echo  1. Right-click Start → Command Prompt (Admin) or Terminal (Admin)
+echo  1. Right-click Start → Terminal (Admin) or Command Prompt (Admin)
 echo.
 echo  2. Type and Enter:
 echo     cleanmgr /sageset:50
 echo.
-echo  3. In the window that opens:
-echo     → Click "Clean up system files" button
+echo  3. In the window:
+echo     → Click "Clean up system files"
 echo     → Wait for scan
-echo     → Tick all the boxes you want cleaned every time
-echo       (tick everything for maximum space recovery)
+echo     → Tick everything you want cleaned regularly
+echo       (recommended: Temporary files, Windows Update Cleanup, thumbnails, Recycle Bin, etc.)
 echo     → Click OK
 echo.
-echo  After this, option 2 runs completely automatic.
-echo  To change selections later → run the same sageset command again.
+echo  After this, option 2 runs fully automatic.
+echo  Change later → run sageset:50 again.
 echo.
 pause
 goto menu
@@ -122,7 +143,7 @@ echo  =======================================
 echo               Info
 echo  =======================================
 echo.
-echo  Script Version : 1.2.0
+echo  Script Version : 1.3.0
 echo.
 echo  Made by:
 echo  Prashant Thakur
@@ -133,3 +154,6 @@ echo  Linkedin:  https://linkedin.com/in/prashant64bit
 echo.
 pause
 goto menu
+
+:end
+exit
