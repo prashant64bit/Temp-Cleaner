@@ -1,5 +1,5 @@
 @echo off
-title Cleaner - Prashant v1.3.0
+title Cleaner - Prashant64bit v1.4.0
 color 0A
 
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -16,7 +16,7 @@ if '%errorlevel%' NEQ '0' (
 cls
 echo.
 echo  =======================================
-echo       TempCleaner - v1.3.0
+echo       TempCleaner - v1.4.0
 echo  =======================================
 echo.
 echo  1 - Quick Cleanup
@@ -40,60 +40,100 @@ echo.
 echo  Quick Cleanup running...
 echo.
 
-echo [1/9] User TEMP folders
+echo [1/12] User TEMP folders
 del /q /f /s /a "%TEMP%\*.*" 2>nul
-del /q /f /s /a "%localappdata%\Temp\*.*" 2>nul
+del /q /f /s /a "%LOCALAPPDATA%\Temp\*.*" 2>nul
+del /s /f /q "%LOCALAPPDATA%\LocalLow\Temp\*.*" 2>nul
 echo Cleared.
 echo.
 
-echo [2/9] Windows Temp
-del /q /f /s /a "C:\Windows\Temp\*.*" 2>nul
+echo [2/12] Windows Temp
+del /q /f /s /a "%WINDIR%\Temp\*.*" 2>nul
 echo Cleared.
 echo.
 
-echo [3/9] DNS flush
-ipconfig /flushdns >nul 2>&1
+echo [3/12] Crash Dumps and Memory Dumps
+del /f /q "%WINDIR%\MEMORY.DMP" 2>nul
+del /f /q /s "%WINDIR%\Minidump\*.*" 2>nul
+del /f /q /s "%LOCALAPPDATA%\CrashDumps\*.*" 2>nul
 echo Cleared.
 echo.
 
-echo [4/9] Browser caches
-rd /s /q "%localappdata%\Microsoft\Edge\User Data\Default\Cache"         2>nul
-rd /s /q "%localappdata%\Microsoft\Edge\User Data\Default\Code Cache"    2>nul
-rd /s /q "%localappdata%\Google\Chrome\User Data\Default\Cache"          2>nul
-rd /s /q "%localappdata%\Google\Chrome\User Data\Default\Code Cache"     2>nul
+echo [4/12] PowerShell History and Caches
+del /f /q /s "%APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\*.*" 2>nul
+del /f /q /s "%LOCALAPPDATA%\Microsoft\Windows\Caches\*.*" 2>nul
 echo Cleared.
 echo.
 
-echo [5/9] Windows Update cache
+echo [5/12] Windows Update cache
 net stop wuauserv   >nul 2>&1
 net stop bits       >nul 2>&1
-del /q /f /s /a "C:\Windows\SoftwareDistribution\Download\*.*"  2>nul
+del /q /f /s /a "%WINDIR%\SoftwareDistribution\Download\*.*" 2>nul
 net start wuauserv  >nul 2>&1
 net start bits      >nul 2>&1
 echo Cleared.
 echo.
 
-echo [6/9] Prefetch
-del /q /f /s /a "C:\Windows\Prefetch\*.*" 2>nul
+echo [6/12] Prefetch
+del /q /f /s /a "%WINDIR%\Prefetch\*.*" 2>nul
 echo Cleared.
 echo.
 
-echo [7/9] Thumbnail cache
-del /q /f /s /a "%localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db" 2>nul
+echo [7/12] Thumbnail cache
+del /q /f /s /a "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" 2>nul
 echo Cleared.
 echo.
-echo [8/9] Recycle Bin
+
+echo [8/12] Recycle Bin
 powershell -command "Clear-RecycleBin -Force -ErrorAction SilentlyContinue" >nul 2>&1
 echo Cleared.
 echo.
 
-echo [9/9] Idle tasks
-start "" rundll32.exe advapi32.dll,ProcessIdleTasks >nul 2>&1
-echo Processed.
+echo [9/12] Browser caches
+rd /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache"         2>nul
+rd /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache"    2>nul
+rd /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache"          2>nul
+rd /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Code Cache"     2>nul
+echo Cleared.
 echo.
-echo  Quick done.
+
+echo [10/12] Log Files
+timeout /t 2 /nobreak >nul
+del /s /f /q "%WINDIR%\Logs\CBS\CbsPersist\*.log" 2>nul
+del /s /f /q "%WINDIR%\Logs\MoSetup\*.log" 2>nul
+del /s /f /q "%WINDIR%\Panther\*.log" 2>nul
+del /s /f /q "%WINDIR%\Logs\*.log" 2>nul
+del /s /f /q "%LOCALAPPDATA%\Microsoft\Windows\WebCache\*.log" 2>nul
+del /s /f /q "%LOCALAPPDATA%\Microsoft\Windows\INetCache\*.log" 2>nul
+echo Cleared.
+echo.
+
+echo [11/12] Windows Defender Logs
+timeout /t 2 /nobreak >nul
+del /s /f /q "%ProgramData%\Microsoft\Windows Defender\*.log" 2>nul
+del /s /f /q "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" 2>nul
+echo Cleared.
+echo.
+
+echo [12/12] DNS and Network Cache Refresh
+timeout /t 2 /nobreak >nul
+ipconfig /flushdns >nul 2>&1
+ipconfig /release  >nul 2>&1
+ipconfig /renew    >nul 2>&1
+echo Cleared.
+echo.
+
+echo  Restarting Explorer...
+taskkill /f /im explorer.exe >nul 2>&1
+DEL /F /S /Q /A "%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>nul
+DEL /F /S /Q /A "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" >nul 2>nul
+start explorer.exe
+
+echo.
+echo  Quick Cleanup finished successfully!
 echo.
 pause
+color 0A
 goto menu
 
 
@@ -143,7 +183,7 @@ echo  =======================================
 echo               Info
 echo  =======================================
 echo.
-echo  Script Version : 1.3.0
+echo  Script Version : 1.4.0
 echo.
 echo  Made by:
 echo  Prashant Thakur
