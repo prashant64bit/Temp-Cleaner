@@ -2,7 +2,7 @@
 
 ![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)  
 ![License](https://img.shields.io/badge/license-MIT-green)  
-![Version](https://img.shields.io/badge/version-1.3.0-orange)  
+![Version](https://img.shields.io/badge/version-1.4.0-orange)  
 
 **Temp-Cleaner** is a lightweight, open-source Windows batch script that safely frees up disk space and improves system performance by removing temporary files, caches, DNS resolver cache, Windows Update leftovers, prefetch files, thumbnail cache, Recycle Bin contents, and more.
 
