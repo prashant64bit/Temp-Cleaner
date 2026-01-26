@@ -7,6 +7,7 @@
 **Temp-Cleaner** is a lightweight, safe Windows batch script that frees up disk space and improves performance by removing temporary files, caches, logs, and other unnecessary data.
 
 ---
+
 ## Features
 - **Quick Cleanup** (fast daily cleanup)
   - User TEMP folders (`%TEMP%`, `%LocalAppData%\Temp`, `LocalLow\Temp`)
@@ -29,6 +30,7 @@
 - Safe — only targets known temporary/cache locations
 
 ---
+
 ## Usage
 1. Double-click `TempCleaner.bat`
 2. Allow Administrator rights
@@ -40,6 +42,7 @@
    - **99**  Exit
 
 *First-time users*: Run *option 3* once to configure Disk Cleanup preset. Then **option 2** will run silently and clean much more.
+
 ---
 
 ## When to Use
@@ -49,17 +52,12 @@
 - Sluggish system performance
 
 ---
-## Requirements
-- Windows 10 / 11
-- Administrator rights (auto-requested)
-
----
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
 Made by **Prashant Thakur**  
-GitHub: https://github.com/prashant64bit  
-Portfolio: https://PrashantThakur.is-a.dev
-LinkedIn: https://linkedin.com/in/prashant64bit
+ GitHub: https://github.com/prashant64bit  
+ Portfolio: https://PrashantThakur.is-a.dev  
+ LinkedIn: https://linkedin.com/in/prashant64bit  
 
