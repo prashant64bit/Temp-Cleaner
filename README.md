@@ -1,75 +1,65 @@
-# 🧹 Temp-Cleaner  
+# 🧹 Temp-Cleaner
 
-![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)  
-![License](https://img.shields.io/badge/license-MIT-green)  
-![Version](https://img.shields.io/badge/version-1.4.0-orange)  
+![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-1.5.0-orange)
 
-**Temp-Cleaner** is a lightweight, open-source Windows batch script that safely frees up disk space and improves system performance by removing temporary files, caches, DNS resolver cache, Windows Update leftovers, prefetch files, thumbnail cache, Recycle Bin contents, and more.
-
----
-
-## Features  
-
-- **Quick Cleanup mode**:
-  - Clears user temporary folders (`%TEMP%` and `%LocalAppData%\Temp`)
-  - Clears `C:\Windows\Temp`
-  - Flushes **DNS cache** (`ipconfig /flushdns`)
-  - Clears **browser caches**
-  - Safely cleans **Windows Update download cache**
-  - Deletes **Prefetch** files
-  - Clears **Thumbnail cache** (`thumbcache_*.db`)
-  - Empties **Recycle Bin**
-  - Runs Windows background idle maintenance tasks (`ProcessIdleTasks`)
-- **Auto Disk Cleanup mode** - silently runs Windows built-in Disk Cleanup with your pre-configured preset
-- Automatic **admin rights elevation** (requests elevation if not already running as administrator)
-- Clean, colorful console menu interface
-- Clear progress messages for every cleanup step
-- One-time setup instructions included for silent Disk Cleanup
-- **Safe by design** - only targets well-known temporary/cache locations
+**Temp-Cleaner** is a lightweight, safe Windows batch script that frees up disk space and improves performance by removing temporary files, caches, logs, and other unnecessary data.
 
 ---
+## Features
+- **Quick Cleanup** (fast daily cleanup)
+  - User TEMP folders (`%TEMP%`, `%LocalAppData%\Temp`, `LocalLow\Temp`)
+  - Windows TEMP (`C:\Windows\Temp`)
+  - Crash/memory dumps
+  - PowerShell history & Windows caches
+  - Windows Update download cache
+  - Prefetch files
+  - Thumbnail cache
+  - Browser caches (Edge + Chrome)
+  - Recycle Bin
+  - Windows logs & Defender logs
+  - DNS cache flush + IP renewal
+  - Explorer restart for thumbnail changes
 
-## Usage  
+- **Auto Disk Cleanup** — silently runs pre-configured `cleanmgr /sagerun:50`
+- Automatic admin elevation
+- Beautiful colorful menu with progress indicators
+- One-time setup instructions for silent Disk Cleanup
+- Safe — only targets known temporary/cache locations
 
-**Recommended way:**
-
+---
+## Usage
 1. Double-click `TempCleaner.bat`
-
-2. Allow run as Administrator. 
-
-3. Choose from the menu:
-   - **1**  Quick Cleanup            (fast & recommended for regular use)
-   - **2**  Auto Disk Cleanup        (powerful silent cleanup – requires one-time setup)
-   - **3**  Setup Instructions       (how to configure option 2 the first time)
+2. Allow Administrator rights
+3. Select from menu:
+   - **1**  Quick Cleanup
+   - **2**  Auto Disk Cleanup
+   - **3**  Setup Instructions (for option 2)
    - **4**  About Developer
    - **99**  Exit
 
-4. **First time users**:  
-   Select **3** (Setup Instructions) and follow the steps to configure your Disk Cleanup preset once.  
-   After that, option **2** will run completely silently and clean much more (including old updates, system files, etc.).
-
+*First-time users*: Run *option 3* once to configure Disk Cleanup preset. Then **option 2** will run silently and clean much more.
 ---
 
 ## When to Use
-
 - Monthly maintenance
-- Before or after large Windows updates
-- When free disk space on C: is getting low
-- Whenever the system feels sluggish
+- After Windows updates
+- Low disk space on C:
+- Sluggish system performance
 
 ---
-
 ## Requirements
-
 - Windows 10 / 11
-- Administrator rights (script auto-requests elevation)
+- Administrator rights (auto-requested)
 
 ---
 
-## LICENSE
-
+## License
 This project is licensed under the [MIT License](LICENSE).
 
 Made by **Prashant Thakur**  
-Portfolio: https://prashant.us.kg  
+GitHub: https://github.com/prashant64bit  
+Portfolio: https://PrashantThakur.is-a.dev
 LinkedIn: https://linkedin.com/in/prashant64bit
+
